@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <title>Par</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="conteudo.css" type="text/css">
+    <script src="../Playing/js/jquery-3.2.1.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style type="text/css" media="screen">
+    body{
+      overflow-x: hidden;
+      overflow-y: hidden;
+      overflow: hidden;
+    }
+    .saibamais1{
+      z-index: 1001;
+      position: absolute;
+      top: 50%;
+      left: 2%;
+      width: 20%;
+      height: 23%;
+      text-align: center;
+      -webkit-transform: translateY( -50% );
+      -moz-transform: translateY( -50% );
+      transform: translateY( -50% );
+      padding: 10px;
+    }
+    .saibamais2 {
+      z-index: 1001;
+      position: absolute;
+      top: 55%;
+      left: 2%;
+      width: 25%;
+      height: 31%;
+      text-align: center;
+      -webkit-transform: translateY( -50% );
+      -moz-transform: translateY( -50% );
+      transform: translateY( -50% );
+      padding: 10px;
+    }
+
+    .btn-danger{
+      color: #ffffff;
+      background-color: #b6003e;;
+      border-color: #b6002e;
+    }
+    .btn-danger:hover,
+    .btn-danger:focus,
+    .btn-danger:active,
+    .btn-danger.active {
+      color: #ffffff;
+      background-color: #69022f;;
+      border-color: #69023f;
+    }
+    //saibamais
+    .glyphicon-hand-down{
+    font-size: 45px;
+    }
+    .clickhere{
+      bottom: 55%;
+      left: 8%;
+      -webkit-transform: translateY( -50% );
+      -moz-transform: translateY( -50% );
+      transform: translateY( -50% );
+      animation: MoveUpDown 1s linear infinite;
+      position: absolute;
+    }
+
+    @keyframes MoveUpDown {
+      0% {
+        bottom: 55%;
+      }
+      50% {
+        bottom: 60%;
+      }
+      100% {
+        bottom: 55%;
+      }
+    }
+    .label{
+    font-size: 20px;
+    }
+	</style>
+	<script src="../shared/scormfunctions.js" type="text/javascript"></script>
+	<script src="../shared/contentfunctions.js" type="text/javascript"></script>
+</head>
+<body onload="X();">
+ <div class="">
+     <div class="embed embed-16by9">
+       <video id="video" class="embed-item" control autoplay>
+          <source src="Scorm_07_PQ-Webos.mp4" type="video/mp4">
+       </video>
+     </div>
+
+     <input type="text" id="time">
+     <input type="text" id="duracao">
+     <div id="clickhere1" class="clickhere">
+        <center>
+        <span class="label label-info">clique aqui</span><br>
+        <i class="glyphicon glyphicon-hand-down btn-lg"></i>
+        </center>
+      </div>
+     <div class="saibamais1">
+       <input id="btnmais1" type='button' class='btn btn-danger' value='SAIBA MAIS' onclick='saibamais1();'>
+     </div>
+     <div id="clickhere2" class="clickhere">
+        <center>
+        <span class="label label-info">clique aqui</span><br>
+        <i class="glyphicon glyphicon-hand-down btn-lg"></i>
+        </center>
+      </div>
+     <div class="saibamais2">
+       <input id="btnmais2" type='button' class='btn btn-danger' value='SAIBA MAIS' onclick='saibamais2();'>
+     </div>
+ </div>
+</body>
+<script>
+$(".saibamais1").hide();
+$(".saibamais2").hide();
+$("#clickhere1").hide();
+$("#clickhere1").hide();
+$(".clickhere").hide();
+var event1=0;
+var event2=0;
+setInterval(function () {
+  console.log(video.currentTime);
+  if(video.currentTime >=32.14 && event1<1){
+    //32.14
+    //56.49
+    video.pause();
+    $(".saibamais1").show();
+    $("#clickhere1").show();
+    event1++;
+  }
+  if(video.currentTime >=56.49 && event2<1){
+    //32.14
+    //56.49
+    video.pause();
+    $(".saibamais2").show();
+    $("#clickhere2").show();
+    event2++;
+  }
+}, 10);
+function saibamais1(){
+  $("#clickhere1").remove();
+  $(".saibamais1").css('background','rgba(255,255,255,0.80)');
+  $("#btnmais1").remove();
+  $(".saibamais1").append("<input id='fechar' type='button' class='btn btn-danger' value='X' onclick='fechar1();'>");
+  $(".saibamais1").append("<p>Tenha acesso fácil e rápido para seus conteúdos mais frequentes!  Com o <strong>Quick Access</strong>, você pode adicionar seus aplicativos e canais favoritos como atalhos. </p>");
+  $("#btnmais1").val("x");
+}
+function fechar1(){
+  video.play();
+  $(".saibamais1").remove();
+}
+function saibamais2(){
+  $("#clickhere2").remove();
+  $(".saibamais2").css('background','rgba(255,255,255,0.80)');
+  $("#btnmais2").remove();
+  $(".saibamais2").append("<input id='fechar' type='button' class='btn btn-danger' value='X' onclick='fechar2();'>");
+  $(".saibamais2").append("<p>•	Para quem gosta de cantar, é possível seguir a letra na tela como um karaokê ou, se preferir, apague a tela para maior economia de energia.</p><p>•	Ouça sua parte favorita da música quantas vezes quiser, basta clicar no trecho da letra. </p>");
+  $("#btnmais2").val("x");
+}
+function fechar2(){
+  video.play();
+  $(".saibamais2").remove();
+}
+video = document.getElementById('video');
+setTimeout(setInterval(x, 30), 1000);
+setInterval(question,30);
+function x(){
+  time = document.getElementById('time');
+  time.value=parseInt(video.currentTime);
+  duracao = document.getElementById('duracao');
+  duracao.value=parseInt(video.duration);
+}
+function question(){
+  if(time.value>5){
+    document.getElementById('menu').style.visibility='visible';
+  }
+  if(time.value>10){
+    document.getElementById('menu').style.visibility='hidden';
+  }
+}
+</script>
+</html>

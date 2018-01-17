@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <title>Par</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="conteudo.css" type="text/css">
+    <script src="../Playing/js/jquery-3.2.1.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style type="text/css" media="screen">
+    body{
+      overflow-x: hidden;
+      overflow-y: hidden;
+      overflow: hidden;
+    }
+    #questao1{
+      position: absolute;
+      top: 50%;
+      left: 15%;
+      width: 70%;
+      height: 45%;
+      text-align: center;
+      -webkit-transform: translateY( -50% );
+      -moz-transform: translateY( -50% );
+      transform: translateY( -50% );
+      background: rgba(255, 255, 255,0.95);
+      border-radius: 20px;
+      //padding: 10px;
+    }
+    #questao1 td{
+      padding: 0 30px;
+    }
+    #questao1 th{
+      background: rgba(255, 153, 128,0.9);
+      border-radius: 20px;
+      padding: 10px;
+    }
+
+    .erradopng {
+      left:20px;
+      height: 15px;
+      background: url('../Playing/images/errado.png');
+      background-repeat: repeat;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      z-index: 1010;
+      //left: 50px;
+      position: absolute;
+      width: 15px;
+      padding: 0;
+      margin: 0;
+    }
+    .corretopng {
+      left:20px;
+      height: 15px;
+      background: url('../Playing/images/correto.png');
+      background-repeat: repeat;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      z-index: 1010;
+      //left: 50px;
+      position: absolute;
+      width: 15px;
+    }
+  
+
+		/*@import url( ../shared/style.css );*/
+	</style>
+	<script src="../shared/scormfunctions.js" type="text/javascript"></script>
+	<script src="../shared/contentfunctions.js" type="text/javascript"></script>
+</head>
+<body>
+      <div class="embed embed-16by9">
+        <video id="video" class="embed-item" control autoplay>
+           <source src="Scorm_08_Line-Up.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <input type="text" id="time">
+      <input type="text" id="duracao">
+
+  <div id="questao1">
+        <table>
+          <form id="pergunta1">
+          <tr>
+            <th><center>O que podemos falar sobre Bean Bird:</center></th>
+          </tr>
+          <tr>
+            <td><br><input type="radio" name="resposta" value="1" /><span id="resposta1">
+			A) Todas as TVs webOS da LG, contém o Bean Bird, como um assistente pessoal, ele ajuda durante a configuração inicial, facilitando a usabilidade.
+			</span></td>
+          </tr>
+          <tr>
+            <td><input type="radio" name="resposta" value="2" /><span id="resposta2">
+			B) Todas as TVs webOS da LG, contém o Bean Bird, como um assistente pessoal, ele ajuda durante todo o uso da TV, facilitando a usabilidade.
+			</span></td>
+          </tr>
+          <tr>
+            <td><input type="radio" name="resposta" value="3" /><span id="resposta3">
+			C) Todas as TVs da LG, contém o Bean Bird, como um assistente pessoal, ele ajuda durante a configuração inicial, facilitando a usabilidade.
+			</span></td>
+          </tr>
+          <tr>
+            <td>
+              <br><input id="responder" type="button" class="btn btn-warning" value="Responder">
+            </td>
+          </tr>
+          </form>
+        </table>
+      </div>
+</body>
+<script>
+$("#questao1").hide();
+
+$("#responder").on('click',function(){
+  /*
+  $("#resposta1").prepend("<div class='corretopng'></div>");
+  $("#resposta2").prepend("<div class='erradopng'></div>");
+  $("#resposta3").prepend("<div class='erradopng'></div>");
+  */
+  $("#resposta2").css('color','green');
+  $("#resposta2").css('font-weight','bold');
+  $("#resposta1").css('color','red');
+  $("#resposta3").css('color','red');
+
+    //if($("input[name='resposta']").val()==1){
+  //alert($("input[name='resposta'][value='1']").val());
+    //$("input[name='resposta'][value='1']").append("<div class='corretopng'></div>");
+    //}
+    //$("input[value='1']").append("<div class='corretopng'>");
+    //$("input[value=2]").append("<div class='erradopng'>");
+    //$("input[value=3]").append("<div class='erradopng'>");
+
+  $("#questao1 table").append("<input id='fechar' type='button' class='btn btn-success' value='Continuar' onclick='fechar1();'>");
+  $("#responder").remove();
+});
+function fechar1(){
+  video.play();
+  $("#questao1").remove();
+}
+video = document.getElementById('video');
+var event1=0;
+$("#questao").hide();
+setInterval(function () {
+  console.log(video.currentTime);
+  if(video.currentTime >=25.30 && event1<1){
+    //32.14
+    //56.49
+    video.pause();
+    $("#questao1").show();
+
+    event1++;
+  }
+}, 10);
+video = document.getElementById('video');
+setTimeout(setInterval(x, 30), 1000);
+setInterval(question,30);
+function x(){
+  time = document.getElementById('time');
+  time.value=parseInt(video.currentTime);
+  duracao = document.getElementById('duracao');
+  duracao.value=parseInt(video.duration);
+}
+function question(){
+  if(time.value>5){
+    document.getElementById('menu').style.visibility='visible';
+  }
+  if(time.value>10){
+    document.getElementById('menu').style.visibility='hidden';
+  }
+}
+</script>
+</html>
